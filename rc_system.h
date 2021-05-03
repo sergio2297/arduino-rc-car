@@ -7,10 +7,10 @@ namespace rc_system {
 
     class RC_System {
         public:
-        // explicit to prevent implicit building
+            // explicit to prevent implicit building
             explicit RC_System(unsigned long period);
-            //explicit PeriodControlledModule(unsigned long period, float work_cycle_percen);
 
+            virtual void setup() = 0;
             void loop(String action, unsigned long current_ms);
 
         protected:

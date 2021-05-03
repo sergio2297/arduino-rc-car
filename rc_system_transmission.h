@@ -10,6 +10,7 @@ namespace rc_system {
     class RC_System_Transmission : public RC_System {
         public:
             RC_System_Transmission();
+            void setup();
 
         protected:
             void routine(String action);
@@ -18,7 +19,6 @@ namespace rc_system {
             TransmissionSystem transmission;
 
     };
-
 }
 
 #endif
