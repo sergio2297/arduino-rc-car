@@ -3,7 +3,10 @@
 
 #include "rc_system.h"
 #include "steering_system.h"
-#include <Arduino.h>
+
+/*
+ * TODO: Make steering_to a concurrent_action where every cycle it's increment is one. Need rc_system refactor
+ */
 
 namespace rc_system {
 
@@ -13,7 +16,7 @@ namespace rc_system {
             void setup();
             
         protected:
-            void routine(String action);
+            void routine(char action);
 
         private:
             SteeringSystem steering;

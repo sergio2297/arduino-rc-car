@@ -3,7 +3,10 @@
 
 #include "rc_system.h"
 #include "transmission_system.h"
-#include <Arduino.h>
+
+/*
+ * TODO: make actions like throttle concurrent and work with "work cycles". Need rc_system refactor
+ */
 
 namespace rc_system {
 
@@ -13,7 +16,7 @@ namespace rc_system {
             void setup();
 
         protected:
-            void routine(String action);
+            void routine(char action);
 
         private:
             TransmissionSystem transmission;

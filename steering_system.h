@@ -12,10 +12,14 @@ class SteeringSystem {
 		
 		int get_current_steering_degrees() const;
 		void steering_right(byte degrees);
-    void center_steering();
+        void steering_right();
+        void center_steering();
+        void steering_left();
 		void steering_left(byte degrees);
 		
 	private:
+        void steering_to(byte degrees);
+    
 		byte steering_degrees;
 		
 		byte pin_servo;

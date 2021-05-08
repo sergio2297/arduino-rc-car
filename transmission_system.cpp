@@ -11,20 +11,12 @@
  */ 
 
 TransmissionSystem::TransmissionSystem(byte pin_enable, byte pin_forward, byte pin_backward) 
-	: is_automatic(false), is_secuencial(false), current_gear(0), number_of_gears(5), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
+	: is_secuencial(true), current_gear(0), number_of_gears(5), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
 
 void TransmissionSystem::setup() const {
 	pinMode(pin_enable, OUTPUT);
 	pinMode(pin_forward, OUTPUT);
 	pinMode(pin_backward, OUTPUT);
-}
-
-void TransmissionSystem::set_automatic() {
-	is_automatic = true;
-}
-
-void TransmissionSystem::set_manual() {
-	is_automatic = false;
 }
 
 void TransmissionSystem::set_secuencial_shift() {
@@ -70,7 +62,6 @@ void TransmissionSystem::reverse() {
 	current_gear = REVERSE;
 }
 
-//TODO: Trabajar con el ciclo de trabajo
 byte TransmissionSystem::calculate_power() const {
 	if(current_gear == REVERSE) {
 		return SHORT_GEAR_POWER; 
@@ -102,12 +93,12 @@ void TransmissionSystem::brake() const {
 	if(current_gear == REVERSE) {
 		digitalWrite(pin_forward, HIGH);
 		digitalWrite(pin_backward, LOW);
-		delay(100);
+		delay(100); //TODO: Delete delay
 		digitalWrite(pin_forward, LOW);
 	} else {
 		digitalWrite(pin_forward, LOW);
 		digitalWrite(pin_backward, HIGH);
-		delay(100);
+		delay(100); //TODO: Delete delay
 		digitalWrite(pin_backward, LOW);
 	}
 	

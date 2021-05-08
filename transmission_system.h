@@ -31,9 +31,10 @@ class TransmissionSystem {
 	private:
 		byte calculate_power() const;
 		
-		bool is_automatic, is_secuencial;
+		bool is_secuencial;
 		byte current_gear, number_of_gears;
 
 		byte pin_enable, pin_forward, pin_backward;
 };
+
 #endif
