@@ -23,3 +23,11 @@ void Led::turnOn() {
 void Led::turnOff() {
 	set_state(0);
 }
+
+void Led::commutate() {
+    if(current_state == 0) {
+        turnOn();
+    } else {
+        turnOff();
+    }
+}

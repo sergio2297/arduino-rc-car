@@ -11,6 +11,10 @@ namespace rc_system {
     void RC_System_Steering::setup() {
         steering.setup();
     }
+
+    void RC_System_Steering::out_of_period_actions(unsigned long current_ms) {
+        steering.move_one_degree_to_target(); // This function makes able to change the steering direction without reach the previous target steering degrees
+    }
     
     void RC_System_Steering::routine(char action) {
          switch(action) {

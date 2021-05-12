@@ -16,11 +16,15 @@ class SteeringSystem {
         void center_steering();
         void steering_left();
 		void steering_left(byte degrees);
-		
+
+        void move_one_degree_to_target();
+        
 	private:
         void steering_to(byte degrees);
+        void calculate_current_increment();
     
-		byte steering_degrees;
+		byte current_steering_degrees, target_steering_degrees;
+        int increment;
 		
 		byte pin_servo;
 		Servo servo;

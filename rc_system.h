@@ -19,6 +19,7 @@ namespace rc_system {
             void loop(char action, unsigned long current_ms);
 
         protected:
+            virtual void out_of_period_actions(unsigned long current_ms) = 0;
             virtual void routine(char action) = 0;
 
         private:

@@ -3,8 +3,8 @@
 #define DIPPED_BEAM_LIGHTS_INTENSITY 40
 #define MAIN_BEAM_LIGHTS_INTENSITY 255
 
-LightsSystem::LightsSystem(byte pin_front_lights, byte pin_back_lights, byte pin_left_blinking_lights, byte pin_right_blinking_lights)
-	: led_front_lights(pin_front_lights), led_back_lights(pin_back_lights), led_left_blinking_lights(pin_left_blinking_lights), led_right_blinking_lights(pin_right_blinking_lights), 
+LightsSystem::LightsSystem(byte pin_front_lights, byte pin_back_lights, byte pin_left_blinking_lights, byte pin_right_blinking_lights, unsigned long period_blinking_lights)
+	: led_front_lights(pin_front_lights), led_back_lights(pin_back_lights), led_left_blinking_lights(pin_left_blinking_lights, period_blinking_lights), led_right_blinking_lights(pin_right_blinking_lights, period_blinking_lights), 
 	are_dipped_beam_on(false), are_main_beam_on(false), are_brake_lights_on(false),
 	are_left_blinking_lights_on(false), are_right_blinking_lights_on(false), are_emergency_lights_on(false) {}
 	
@@ -69,34 +69,28 @@ void LightsSystem::turn_brake_lights(bool state) {
 void LightsSystem::turn_left_blinking_lights(bool state) {
     are_left_blinking_lights_on = state;
     if(state == true) {
-        led_left_blinking_lights.turnOn();
-        turn_right_blinking_lights(false);
-    } else if(!are_emergency_lights_on) {
-        led_left_blinking_lights.turnOff();
+        are_right_blinking_lights_on = false;
     }
+    led_left_blinking_lights.turnOff();
+    led_right_blinking_lights.turnOff();
 }
 
 void LightsSystem::turn_right_blinking_lights(bool state) {
     are_right_blinking_lights_on = state;
     if(state == true) {
-        led_right_blinking_lights.turnOn();
-        turn_left_blinking_lights(false);
-    } else if(!are_emergency_lights_on) {
-        led_right_blinking_lights.turnOff();
+        are_left_blinking_lights_on = false;
     }
+    led_left_blinking_lights.turnOff();
+    led_right_blinking_lights.turnOff();
 }
 
 void LightsSystem::turn_emergency_lights(bool state) {
     are_emergency_lights_on = state;
-    if(state == true) {
-        led_left_blinking_lights.turnOn();
-        led_right_blinking_lights.turnOn();
-    } else {
-        if(!are_left_blinking_lights_on) {
-            led_left_blinking_lights.turnOff();
-        }
-        if(!are_right_blinking_lights_on) {
-            led_right_blinking_lights.turnOff();
-        }
-    }
+    led_left_blinking_lights.turnOff();
+    led_right_blinking_lights.turnOff();
+}
+
+void LightsSystem::blinking_lights_routine(unsigned long current_ms) const {
+    led_left_blinking_lights.routine(current_ms, are_left_blinking_lights_on || are_emergency_lights_on);
+    led_right_blinking_lights.routine(current_ms, are_right_blinking_lights_on || are_emergency_lights_on);
 }

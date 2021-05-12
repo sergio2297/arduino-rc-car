@@ -13,6 +13,7 @@ class Led {
 		void set_state(byte state);
 		void turnOn();
 		void turnOff();
+        void commutate();
 		
 	private:
 		byte current_state;

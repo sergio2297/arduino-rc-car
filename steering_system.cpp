@@ -10,7 +10,7 @@
  */
 
 SteeringSystem::SteeringSystem(byte pin_servo)
-	:  steering_degrees(CENTER_POSITION), pin_servo(pin_servo), servo(Servo()) {}
+	:  current_steering_degrees(CENTER_POSITION), target_steering_degrees(CENTER_POSITION), increment(0), pin_servo(pin_servo), servo(Servo()) {}
 		
 void SteeringSystem::setup() {
     servo.attach(pin_servo); //attach() must be call in the sketch's setup void
@@ -18,31 +18,50 @@ void SteeringSystem::setup() {
 }
 
 int SteeringSystem::get_current_steering_degrees() const {
-	return steering_degrees - CENTER_POSITION;
+	return current_steering_degrees - CENTER_POSITION;
+}
+
+// Function for concurrent behaviour
+void SteeringSystem::move_one_degree_to_target() {
+    if(current_steering_degrees != target_steering_degrees) {
+        current_steering_degrees += increment;
+        servo.write(current_steering_degrees);
+    }
+}
+
+// Function for concurrent behaviour
+void SteeringSystem::calculate_current_increment() {
+    increment = 0;
+    if(((int)current_steering_degrees - target_steering_degrees) < 0) { // go to right
+        increment = +1;
+    } else if(((int)current_steering_degrees - target_steering_degrees) > 0) { // go to left
+        increment = -1;
+    }
 }
 
 void SteeringSystem::steering_to(byte degrees) {
     int increment = 0;
-    if(((int)steering_degrees - degrees) < 0) { // go to right
+    if(((int)current_steering_degrees - degrees) < 0) { // go to right
         increment = +1;
-    } else if(((int)steering_degrees - degrees) > 0) { // go to left
+    } else if(((int)current_steering_degrees - degrees) > 0) { // go to left
         increment = -1;
     }
 
-    while(steering_degrees != degrees) {
-        steering_degrees += increment;
-        servo.write(steering_degrees);  
+    while(current_steering_degrees != degrees) {
+        current_steering_degrees += increment;
+        servo.write(current_steering_degrees);  
     }
 }
 
 void SteeringSystem::steering_right(byte degrees){
 	if(degrees > MAX_DEGREES) {
-		degrees = CENTER_POSITION + MAX_DEGREES;
+		target_steering_degrees = CENTER_POSITION + MAX_DEGREES;
 	} else {
-		degrees = CENTER_POSITION + degrees;
+		target_steering_degrees = CENTER_POSITION + degrees;
 	}
 
-    steering_to(degrees);
+    calculate_current_increment(); // Concurrent version
+    //steering_to(target_steering_degrees); // No concurrent version 
 }
 
 void SteeringSystem::steering_right() {
@@ -50,7 +69,8 @@ void SteeringSystem::steering_right() {
 }
 
 void SteeringSystem::center_steering() {
-    steering_to(CENTER_POSITION);
+    calculate_current_increment(); // Concurrent version
+    //steering_to(CENTER_POSITION); // No concurrent version
 }
 
 void SteeringSystem::steering_left() {
@@ -59,10 +79,11 @@ void SteeringSystem::steering_left() {
 
 void SteeringSystem::steering_left(byte degrees) {
 	if(degrees > MAX_DEGREES) {
-		degrees = CENTER_POSITION - MAX_DEGREES;
+		target_steering_degrees = CENTER_POSITION - MAX_DEGREES;
 	} else {
-		degrees = CENTER_POSITION - degrees;
+		target_steering_degrees = CENTER_POSITION - degrees;
 	}
 
-    steering_to(degrees);
+    calculate_current_increment();  // Concurrent version
+    //steering_to(target_steering_degrees); // No concurrent version
 }

@@ -43,6 +43,7 @@
 //--------------------------------------------------------------------------------
 //--------------------------------- Lights System --------------------------------
 #define PERIOD_MS_LIGHTS_SYSTEM 500
+#define PERIOD_MS_BLINKING_LIGHTS 750
 #define PIN_FRONT_LIGHTS_LIGHTS_SYSTEM 10   // Need to be a PWM pin
 #define PIN_BACK_LIGHTS_LIGHTS_SYSTEM 3    // Need to be a PWM pin
 #define PIN_LEFT_BLINKING_LIGHTS_LIGHTS_SYSTEM 7
@@ -66,7 +67,7 @@
 
 //--------------------------------------------------------------------------------
 //------------------------------ Steering System ---------------------------------
-#define PERIOD_MS_STEERING_SYSTEM 350
+#define PERIOD_MS_STEERING_SYSTEM 250
 #define PIN_SERVO_STEERING_SYSTEM 9     // Need to be a PWM pin
 
 #define STEERING_SYSTEM_ACTION_HEADER "S_"

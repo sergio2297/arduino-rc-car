@@ -10,11 +10,12 @@ namespace rc_system {
         if(action != SYSTEM_NO_ACTION_CODE) {
            queue_actions.push(&action);
         }
+
+        out_of_period_actions(current_ms); // This function is supposed to perform very simple operations
         
         if(current_ms - timestamp >= period) {
             timestamp += period;
 
-            //TODO: Comenzamos el ciclo de trabajo
             if(!queue_actions.isEmpty()) {
                 queue_actions.pop(&action);
                 routine(action);              

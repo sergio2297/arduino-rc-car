@@ -16,6 +16,7 @@ namespace rc_system {
             void setup();
             
         protected:
+            void out_of_period_actions(unsigned long current_ms);
             void routine(char action);
 
         private:

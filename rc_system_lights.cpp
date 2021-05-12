@@ -4,12 +4,16 @@
 namespace rc_system {
 	
 	RC_System_Lights::RC_System_Lights() :
-		RC_System(PERIOD_MS_LIGHTS_SYSTEM), lights(PIN_FRONT_LIGHTS_LIGHTS_SYSTEM, PIN_BACK_LIGHTS_LIGHTS_SYSTEM, PIN_LEFT_BLINKING_LIGHTS_LIGHTS_SYSTEM, PIN_RIGHT_BLINKING_LIGHTS_LIGHTS_SYSTEM) {}
+		RC_System(PERIOD_MS_LIGHTS_SYSTEM), lights(PIN_FRONT_LIGHTS_LIGHTS_SYSTEM, PIN_BACK_LIGHTS_LIGHTS_SYSTEM, PIN_LEFT_BLINKING_LIGHTS_LIGHTS_SYSTEM, PIN_RIGHT_BLINKING_LIGHTS_LIGHTS_SYSTEM, PERIOD_MS_BLINKING_LIGHTS) {}
 
 	void RC_System_Lights::setup() {
 		lights.setup();
 	}
-	
+
+    void RC_System_Lights::out_of_period_actions(unsigned long current_ms) {
+        lights.blinking_lights_routine(current_ms);
+    }
+    
 	void RC_System_Lights::routine(char action) {
 		switch(action) {
             case LIGHTS_SYSTEM_ACTION_TURN_ON_DIPPED_BEAM_LIGHTS:

@@ -13,6 +13,10 @@ namespace rc_system {
         transmission.setup();
     }
 
+    void RC_System_Transmission::out_of_period_actions(unsigned long current_ms) {
+        // Nothing to do
+    }
+
     void RC_System_Transmission::routine(char action) {
         switch(action) {
             case TRANSMISSION_SYSTEM_ACTION_THROTTLE:

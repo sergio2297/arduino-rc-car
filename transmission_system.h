@@ -27,7 +27,7 @@ class TransmissionSystem {
 		void throttle() const;
 		void stop_throttle() const;
 		void brake() const;
-		
+
 	private:
 		byte calculate_power() const;
 		
