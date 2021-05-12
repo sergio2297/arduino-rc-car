@@ -2,15 +2,18 @@
 #include "String.h"
 #include "constants.h"
 #include "rc_system_transmission.h"
+#include "rc_system_lights.h"
 #include "rc_system_steering.h"
 
 using namespace rc_system;
 
-#define NUM_SYSTEMS 2
+#define NUM_SYSTEMS 3
 #define TRANSMISSION_SYSTEM_ID 0
-#define STEERING_SYSTEM_ID 1
+#define LIGHTS_SYSTEM_ID 1
+#define STEERING_SYSTEM_ID 2
 
 RC_System_Transmission transmission;
+RC_System_Lights lights;
 RC_System_Steering steering;
 
 void readActionsFromSerial(char actions[]) {
@@ -29,6 +32,9 @@ void readActionsFromSerial(char actions[]) {
             if(splitted_command.startsWith(TRANSMISSION_SYSTEM_ACTION_HEADER)) {
                 splitted_command.replace(TRANSMISSION_SYSTEM_ACTION_HEADER, "");
                 actions[TRANSMISSION_SYSTEM_ID] = splitted_command.charAt(0);
+            } else if(splitted_command.startsWith(LIGHTS_SYSTEM_ACTION_HEADER)) {
+                splitted_command.replace(LIGHTS_SYSTEM_ACTION_HEADER, "");
+                actions[LIGHTS_SYSTEM_ID] = splitted_command.charAt(0);
             } else if(splitted_command.startsWith(STEERING_SYSTEM_ACTION_HEADER)) {
                 splitted_command.replace(STEERING_SYSTEM_ACTION_HEADER, "");
                 actions[STEERING_SYSTEM_ID] = splitted_command.charAt(0);
@@ -46,6 +52,7 @@ void setup() {
     }
 
     transmission.setup();
+    lights.setup();
     steering.setup();
 }
 
@@ -55,6 +62,7 @@ void loop() {
     readActionsFromSerial(actions);
     
     transmission.loop(actions[TRANSMISSION_SYSTEM_ID], current_ms);
+    lights.loop(actions[LIGHTS_SYSTEM_ID], current_ms);
     steering.loop(actions[STEERING_SYSTEM_ID], current_ms);
 
 }
