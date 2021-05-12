@@ -22,6 +22,7 @@ class LightsSystem {
 		Led led_left_blinking_lights, led_right_blinking_lights;
 	
 		bool are_dipped_beam_on, are_main_beam_on, are_brake_lights_on;
+        bool are_left_blinking_lights_on, are_right_blinking_lights_on, are_emergency_lights_on;
 		
 };
 
