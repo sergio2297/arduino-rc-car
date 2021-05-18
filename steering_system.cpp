@@ -69,6 +69,7 @@ void SteeringSystem::steering_right() {
 }
 
 void SteeringSystem::center_steering() {
+    target_steering_degrees = CENTER_POSITION;
     calculate_current_increment(); // Concurrent version
     //steering_to(CENTER_POSITION); // No concurrent version
 }

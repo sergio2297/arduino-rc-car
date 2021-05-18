@@ -11,7 +11,7 @@
  */ 
 
 TransmissionSystem::TransmissionSystem(byte pin_enable, byte pin_forward, byte pin_backward) 
-	: is_secuencial(true), current_gear(0), number_of_gears(5), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
+	: is_secuencial(true), current_gear(NEUTRAL), number_of_gears(5), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
 
 void TransmissionSystem::setup() const {
 	pinMode(pin_enable, OUTPUT);
