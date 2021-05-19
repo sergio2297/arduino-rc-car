@@ -4,7 +4,7 @@
 namespace rc_system {
 	
 	RC_System_Lights::RC_System_Lights() :
-		RC_System(PERIOD_MS_LIGHTS_SYSTEM), lights(PIN_FRONT_LIGHTS_LIGHTS_SYSTEM, PIN_BACK_LIGHTS_LIGHTS_SYSTEM, PIN_LEFT_BLINKING_LIGHTS_LIGHTS_SYSTEM, PIN_RIGHT_BLINKING_LIGHTS_LIGHTS_SYSTEM, PERIOD_MS_BLINKING_LIGHTS) {}
+		RC_System(PERIOD_MS_LIGHTS_SYSTEM), lights(PIN_FRONT_LIGHTS_LIGHTS_SYSTEM, PIN_BACK_LIGHTS_LIGHTS_SYSTEM, PIN_REVERSE_LIGHTS_SYSTEM, PIN_LEFT_BLINKING_LIGHTS_LIGHTS_SYSTEM, PIN_RIGHT_BLINKING_LIGHTS_LIGHTS_SYSTEM, PERIOD_MS_BLINKING_LIGHTS) {}
 
 	void RC_System_Lights::setup() {
 		lights.setup();
@@ -38,6 +38,14 @@ namespace rc_system {
 
             case LIGHTS_SYSTEM_ACTION_TURN_OFF_BRAKE_LIGHTS:
                 lights.turn_brake_lights(false);
+                break;
+
+            case LIGHTS_SYSTEM_ACTION_TURN_ON_REVERSE_LIGHTS:
+                lights.turn_reverse_lights(true);
+                break;
+
+            case LIGHTS_SYSTEM_ACTION_TURN_OFF_REVERSE_LIGHTS:
+                lights.turn_reverse_lights(false);
                 break;
 
             case LIGHTS_SYSTEM_ACTION_TURN_ON_LEFT_BLINKING:
