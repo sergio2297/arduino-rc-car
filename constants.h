@@ -21,7 +21,7 @@
 //--------------------------------------------------------------------------------
 //------------------------------ Transmission System -----------------------------
 #define PERIOD_MS_TRANSMISSION_SYSTEM 200
-#define PIN_ENABLE_TRANSMISSION_SYSTEM 2
+#define PIN_ENABLE_TRANSMISSION_SYSTEM 4
 #define PIN_FORWARD_TRANSMISSION_SYSTEM 5   // Need to be a PWM pin
 #define PIN_BACKWARD_TRANSMISSION_SYSTEM 6  // Need to be a PWM pin
 
@@ -36,7 +36,7 @@
 #define TRANSMISSION_SYSTEM_ACTION_REVERSE 'R'
 #define TRANSMISSION_SYSTEM_ACTION_H_SHIFT 'h'
 #define TRANSMISSION_SYSTEM_ACTION_SECUENCIAL_SHIFT 's'
-// To config the number of gears it will neccesary to use ASCII code from characters
+// To config the number of gears it will be neccesary to use ASCII code from characters
 //--------------------------------------------------------------------------------
 
 
@@ -45,8 +45,8 @@
 #define PERIOD_MS_LIGHTS_SYSTEM 500
 #define PERIOD_MS_BLINKING_LIGHTS 750
 #define PIN_FRONT_LIGHTS_LIGHTS_SYSTEM 10   // Need to be a PWM pin
-#define PIN_BACK_LIGHTS_LIGHTS_SYSTEM 3    // Need to be a PWM pin
-#define PIN_REVERSE_LIGHTS_SYSTEM 4
+#define PIN_BACK_LIGHTS_LIGHTS_SYSTEM 9     // Need to be a PWM pin
+#define PIN_REVERSE_LIGHTS_SYSTEM 2
 #define PIN_LEFT_BLINKING_LIGHTS_LIGHTS_SYSTEM 7
 #define PIN_RIGHT_BLINKING_LIGHTS_LIGHTS_SYSTEM 8
 
@@ -71,12 +71,14 @@
 //--------------------------------------------------------------------------------
 //------------------------------ Steering System ---------------------------------
 #define PERIOD_MS_STEERING_SYSTEM 250
-#define PIN_SERVO_STEERING_SYSTEM 9     // Need to be a PWM pin
+#define PIN_SERVO_STEERING_SYSTEM 3     // Need to be a PWM pin
 
 #define STEERING_SYSTEM_ACTION_HEADER "S_"
 #define STEERING_SYSTEM_ACTION_RIGHT 'R'
 #define STEERING_SYSTEM_ACTION_MIDDLE 'M'
 #define STEERING_SYSTEM_ACTION_LEFT 'L'
+// To turn the steering a concrete amount of degrees it will be necessary to pass a number (for turn right)
+// beteween [0,9] and a letter (for turn left) between [A,J] to use its ASCII code.
 //--------------------------------------------------------------------------------
 
 #endif
