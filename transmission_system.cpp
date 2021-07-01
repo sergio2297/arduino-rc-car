@@ -11,7 +11,7 @@
  */ 
 
 TransmissionSystem::TransmissionSystem(byte pin_enable, byte pin_forward, byte pin_backward) 
-	: is_secuencial(true), current_gear(NEUTRAL), number_of_gears(5), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
+	: is_sequential(true), current_gear(NEUTRAL), number_of_gears(5), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
 
 void TransmissionSystem::setup() const {
 	pinMode(pin_enable, OUTPUT);
@@ -19,12 +19,12 @@ void TransmissionSystem::setup() const {
 	pinMode(pin_backward, OUTPUT);
 }
 
-void TransmissionSystem::set_secuencial_shift() {
-	is_secuencial = true;
+void TransmissionSystem::set_sequential_shift() {
+	is_sequential = true;
 }
 
 void TransmissionSystem::set_h_shift() {
-	is_secuencial = false;
+	is_sequential = false;
 }
 
 int TransmissionSystem::get_current_gear() const {
@@ -48,7 +48,7 @@ void TransmissionSystem::shift_down() {
 }
 
 void TransmissionSystem::shift_to(int gear) {
-	if(!is_secuencial && ((REVERSE -1) <= gear && gear <= number_of_gears)) {
+	if(!is_sequential && ((REVERSE -1) <= gear && gear <= number_of_gears)) {
 		byte gear_to_shift = ((byte)gear + 1);
 		current_gear = gear_to_shift;
 	}

@@ -35,7 +35,7 @@
 #define TRANSMISSION_SYSTEM_ACTION_NEUTRAL 'N'
 #define TRANSMISSION_SYSTEM_ACTION_REVERSE 'R'
 #define TRANSMISSION_SYSTEM_ACTION_H_SHIFT 'h'
-#define TRANSMISSION_SYSTEM_ACTION_SECUENCIAL_SHIFT 's'
+#define TRANSMISSION_SYSTEM_ACTION_SEQUENTIAL_SHIFT 's'
 // To config the number of gears it will be neccesary to use ASCII code from characters
 //--------------------------------------------------------------------------------
 

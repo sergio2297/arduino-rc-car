@@ -11,7 +11,7 @@ class TransmissionSystem {
 
 		void set_automatic();
 		void set_manual();
-		void set_secuencial_shift();
+		void set_sequential_shift();
 		void set_h_shift();
 
 		int get_current_gear() const;
@@ -31,7 +31,7 @@ class TransmissionSystem {
 	private:
 		byte calculate_power() const;
 		
-		bool is_secuencial;
+		bool is_sequential;
 		byte current_gear, number_of_gears;
 
 		byte pin_enable, pin_forward, pin_backward;

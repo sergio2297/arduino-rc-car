@@ -60,8 +60,8 @@ namespace rc_system {
                 transmission.shift_to(String(action).toInt());
                 break;
 
-            case TRANSMISSION_SYSTEM_ACTION_SECUENCIAL_SHIFT:
-                transmission.set_secuencial_shift();
+            case TRANSMISSION_SYSTEM_ACTION_SEQUENTIAL_SHIFT:
+                transmission.set_sequential_shift();
                 break;
 
             case TRANSMISSION_SYSTEM_ACTION_H_SHIFT:
