@@ -2,8 +2,8 @@
 
 #define NEUTRAL 1
 #define REVERSE 0
-#define SHORT_GEAR_POWER 255
-#define LONG_GEAR_POWER 190
+#define SHORT_GEAR_POWER 190
+#define LONG_GEAR_POWER 255
 /**
  * current_gear is stored in a byte variable, so it's not possible to put it negative. That's why
  * the expressions related with shifting and gears aren't ituitive. If the highest gear of the car 
@@ -11,7 +11,7 @@
  */ 
 
 TransmissionSystem::TransmissionSystem(byte pin_enable, byte pin_forward, byte pin_backward) 
-	: is_sequential(true), current_gear(NEUTRAL), number_of_gears(5), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
+	: is_sequential(true), current_gear(NEUTRAL), number_of_gears(5), is_accelerating(false), pin_enable(pin_enable), pin_forward(pin_forward), pin_backward(pin_backward) {}
 
 void TransmissionSystem::setup() const {
 	pinMode(pin_enable, OUTPUT);
@@ -37,6 +37,12 @@ byte TransmissionSystem::get_number_of_gears() const {
 
 void TransmissionSystem::set_number_of_gears(byte number_of_gears) {
 	(*this).number_of_gears = number_of_gears;
+}
+
+void TransmissionSystem::engine_routine() {
+	if(is_accelerating) {
+		analogWrite(pin_enable, calculate_power());
+	}
 }
 
 void TransmissionSystem::shift_up() {
@@ -69,11 +75,14 @@ byte TransmissionSystem::calculate_power() const {
 		return 0;
 	} else {
 		byte normaliced_current_gear = current_gear - 1; // Normalize the gear
-		return normaliced_current_gear <= (number_of_gears/2) ? SHORT_GEAR_POWER : LONG_GEAR_POWER;
+		return normaliced_current_gear <= (number_of_gears/2) ? 
+		SHORT_GEAR_POWER - ((number_of_gears/2) - normaliced_current_gear)*10 : 
+		LONG_GEAR_POWER - (number_of_gears - normaliced_current_gear)*10;
 	}
 }
 
-void TransmissionSystem::throttle() const {
+void TransmissionSystem::throttle() {
+	is_accelerating = true;
 	analogWrite(pin_enable, calculate_power());
 	if(current_gear == REVERSE) {
 		digitalWrite(pin_forward, LOW);
@@ -84,11 +93,13 @@ void TransmissionSystem::throttle() const {
 	}
 }
 
-void TransmissionSystem::stop_throttle() const {
+void TransmissionSystem::stop_throttle() {
+	is_accelerating = false;
 	digitalWrite(pin_enable, LOW);
 }
 
-void TransmissionSystem::brake() const {
+void TransmissionSystem::brake() {
+	is_accelerating = false;
 	digitalWrite(pin_enable, HIGH);
 	if(current_gear == REVERSE) {
 		digitalWrite(pin_forward, HIGH);

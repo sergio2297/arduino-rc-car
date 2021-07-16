@@ -14,7 +14,7 @@ namespace rc_system {
     }
 
     void RC_System_Transmission::out_of_period_actions(unsigned long current_ms) {
-        // Nothing to do
+        transmission.engine_routine();
     }
 
     void RC_System_Transmission::routine(char action) {
