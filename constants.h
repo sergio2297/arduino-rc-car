@@ -16,6 +16,8 @@
 #define SYSTEM_END_COMMAND '$'
 #define SYSTEM_END_ACTION ';'
 #define SYSTEM_NO_ACTION_CODE ' '
+#define PIN_RX_BLUETOOTH 12 // Reading
+#define PIN_TX_BLUETOOTH 13 // Transmission
 //--------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------

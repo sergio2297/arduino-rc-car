@@ -76,8 +76,8 @@ byte TransmissionSystem::calculate_power() const {
 	} else {
 		byte normaliced_current_gear = current_gear - 1; // Normalize the gear
 		return normaliced_current_gear <= (number_of_gears/2) ? 
-		SHORT_GEAR_POWER - ((number_of_gears/2) - normaliced_current_gear)*10 : 
-		LONG_GEAR_POWER - (number_of_gears - normaliced_current_gear)*10;
+			SHORT_GEAR_POWER - ((number_of_gears/2) - normaliced_current_gear)*10 : 
+			LONG_GEAR_POWER - (number_of_gears - normaliced_current_gear)*10;
 	}
 }
 
