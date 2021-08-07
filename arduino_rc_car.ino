@@ -2,6 +2,7 @@
 #include <SoftwareSerial.h>
 #include "String.h"
 #include "constants.h"
+#include "rfid_system.h"
 #include "rc_system_transmission.h"
 #include "rc_system_lights.h"
 #include "rc_system_steering.h"
@@ -14,6 +15,7 @@ using namespace rc_system;
 #define STEERING_SYSTEM_ID 2
 
 SoftwareSerial bluetooth(PIN_RX_BLUETOOTH, PIN_TX_BLUETOOTH);
+RFID_System rfid;
 RC_System_Transmission transmission;
 RC_System_Lights lights;
 RC_System_Steering steering;
@@ -84,6 +86,7 @@ void setup() {
     }
 
     bluetooth.begin(38400);
+    rfid.setup();
     transmission.setup();
     lights.setup();
     steering.setup();
@@ -91,6 +94,9 @@ void setup() {
 
 void loop() {
     unsigned long current_ms = millis();
+
+    rfid.loop(bluetooth);
+    
     char actions[NUM_SYSTEMS];
     // readActionsFromSerial(actions); // Used for debug and test 
     readActionsFromBluetooth(actions);

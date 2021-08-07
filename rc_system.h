@@ -3,11 +3,6 @@
 
 #include <cppQueue.h>
 
-/*
- * TODO: Add a virtual function concurrent_action that offer the class some possibilities to do something despite 
- * its period it's not active
- */
-
 namespace rc_system {
 
     class RC_System {

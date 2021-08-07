@@ -16,6 +16,11 @@
 #define SYSTEM_END_COMMAND '$'
 #define SYSTEM_END_ACTION ';'
 #define SYSTEM_NO_ACTION_CODE ' '
+
+// AT+NAME=RaceYourTrack_Car
+// AT+PSWD="7806"
+// AT+UART=38400,0,0
+// AT+ROLE=0  //Slave
 #define PIN_RX_BLUETOOTH 12 // Reading
 #define PIN_TX_BLUETOOTH 13 // Transmission
 //--------------------------------------------------------------------------------
@@ -81,6 +86,17 @@
 #define STEERING_SYSTEM_ACTION_LEFT 'L'
 // To turn the steering a concrete amount of degrees it will be necessary to pass a number (for turn right)
 // beteween [0,9] and a letter (for turn left) between [A,J] to use its ASCII code.
+//--------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------
+//------------------------------ RFID System ---------------------------------
+#define PIN_RFID_SYSTEM_SS 53
+#define PIN_RFID_SYSTEM_RESET 49
+
+// Card UID and Key_chain UID are declared in RFID_System.cpp
+#define CARD_CODE 'C'
+#define KEY_CHAIN_CODE 'K'
 //--------------------------------------------------------------------------------
 
 #endif
