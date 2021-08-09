@@ -40,7 +40,6 @@ namespace rc_system {
 			if(equals_UID(read_UID, UID_CARD)) {
                 serial.write(CARD_CODE);
 			} else if(equals_UID(read_UID, UID_KEY_CHAIN)) {
-				// TODO: send via bluetooth
                 serial.write(KEY_CHAIN_CODE);
 			}
 		}

@@ -95,14 +95,13 @@ void setup() {
 void loop() {
     unsigned long current_ms = millis();
 
-    rfid.loop(bluetooth);
-    
     char actions[NUM_SYSTEMS];
-    // readActionsFromSerial(actions); // Used for debug and test 
+    //readActionsFromSerial(actions); // Used for debug and test only
     readActionsFromBluetooth(actions);
     
     transmission.loop(actions[TRANSMISSION_SYSTEM_ID], current_ms);
     lights.loop(actions[LIGHTS_SYSTEM_ID], current_ms);
     steering.loop(actions[STEERING_SYSTEM_ID], current_ms);
 
+    rfid.loop(bluetooth);
 }

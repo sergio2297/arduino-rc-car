@@ -1,4 +1,5 @@
 #include "steering_system.h"
+#include "constants.h"
 
 #define CENTER_POSITION 90
 #define MAX_DEGREES 90
@@ -33,18 +34,18 @@ void SteeringSystem::move_one_degree_to_target() {
 void SteeringSystem::calculate_current_increment() {
     increment = 0;
     if(((int)current_steering_degrees - target_steering_degrees) < 0) { // go to right
-        increment = +1;
+        increment = +STEERING_SYSTEM_INCREMENT_DEGREES;
     } else if(((int)current_steering_degrees - target_steering_degrees) > 0) { // go to left
-        increment = -1;
+        increment = -STEERING_SYSTEM_INCREMENT_DEGREES;
     }
 }
 
 void SteeringSystem::steering_to(byte degrees) {
     int increment = 0;
     if(((int)current_steering_degrees - degrees) < 0) { // go to right
-        increment = +1;
+        increment = +STEERING_SYSTEM_INCREMENT_DEGREES;
     } else if(((int)current_steering_degrees - degrees) > 0) { // go to left
-        increment = -1;
+        increment = -STEERING_SYSTEM_INCREMENT_DEGREES;
     }
 
     while(current_steering_degrees != degrees) {
