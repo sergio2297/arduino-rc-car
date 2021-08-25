@@ -8,16 +8,17 @@
 
 namespace rc_system {
 
-    class RFID_System {
+    class RfidSystem {
         public:
-            RFID_System();
+            RfidSystem();
 			
-			void setup();
-            void loop(SoftwareSerial serial);
+			void setup(SoftwareSerial& output_serial);
+            bool try_to_read_UID();
 
         private:		
 			MFRC522 mfrc522;
 			byte read_UID[4];
+            SoftwareSerial serial;
 		
 			void read_UID_from_card();
 			boolean equals_UID(byte UID1[], byte UID_2[]) const;

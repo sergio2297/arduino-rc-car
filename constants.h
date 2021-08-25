@@ -92,12 +92,14 @@
 
 //--------------------------------------------------------------------------------
 //------------------------------ RFID System ---------------------------------
+#define PERIOD_MS_RFID_SYSTEM 10
+#define RFID_SYSTEM_MINIMUM_DELAY_BETWEEN_CHECKS_MS 5000
 #define PIN_RFID_SYSTEM_SS 53
 #define PIN_RFID_SYSTEM_RESET 49
 
 // Card UID and Key_chain UID are declared in RFID_System.cpp
-#define CARD_CODE 'C'
-#define KEY_CHAIN_CODE 'K'
+#define RFID_SYSTEM_CARD_CODE 'C'
+#define RFID_SYSTEM_KEY_CHAIN_CODE 'K'
 //--------------------------------------------------------------------------------
 
 #endif

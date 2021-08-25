@@ -24,7 +24,8 @@ int SteeringSystem::get_current_steering_degrees() const {
 
 // Function for concurrent behaviour
 void SteeringSystem::move_one_degree_to_target() {
-    if(current_steering_degrees != target_steering_degrees) {
+    if(increment < 0 && current_steering_degrees > target_steering_degrees
+        || increment > 0 && current_steering_degrees < target_steering_degrees) {
         current_steering_degrees += increment;
         servo.write(current_steering_degrees);
     }
